@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Task = require('./task.model.js');
 
 const BoardListSchema = new Schema(
   {

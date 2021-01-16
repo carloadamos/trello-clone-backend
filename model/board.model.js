@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const BoardList = require('./boardList.model.js');
 
 const BoardSchema = new Schema(
   {
