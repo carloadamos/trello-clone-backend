@@ -1,17 +1,16 @@
 const router = require('express').Router();
-let List = require('../model/list.model');
+const BoardList = require('../model/boardList.model.js');
 
 router.route('/').get((req, res) => {
-  List.find()
+  BoardList.find()
     .then((lists) => res.json(lists))
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
 router.route('/add').post((req, res) => {
-  const title = req.body.title;
-  const newList = new List({
-    title,
-    tasks: []
+  const { board_list_name } = req.body;
+  const newList = new BoardList({
+    board_list_name,
   });
 
   newList
@@ -21,7 +20,7 @@ router.route('/add').post((req, res) => {
 });
 
 router.route('/update/:id').put((req, res) => {
-  List.findById(req.params.id).then((taskList) => {
+  BoardList.findById(req.params.id).then((taskList) => {
     taskList.title = req.body.title;
     taskList.tasks = req.body.tasks;
 
@@ -33,13 +32,13 @@ router.route('/update/:id').put((req, res) => {
 });
 
 router.route('/:id').delete((req, res) => {
-  List.findByIdAndDelete(req.params.id)
+  BoardList.findByIdAndDelete(req.params.id)
     .then(() => res.json('Task list deleted'))
     .catch((err) => res.status(400).json(`Error : ${err}`));
 });
 
 router.route('/').delete((req, res) => {
-  List.deleteMany()
+  BoardList.deleteMany()
     .then(() => res.json('All task list deleted'))
     .catch((err) => res.status(400).json(`Error : ${err}`));
 });

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-let Board = require('../model/board.model');
+const Board = require('../model/board.model');
 
 router.route('/').get((req, res) => {
   Board.find()
@@ -8,11 +8,9 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const title = req.body[0].title;
-  const list = req.body[0].list;
+  const { board_name } = req.body;
   const board = new Board({
-    title,
-    list: list || []
+    board_name,
   });
 
   board

@@ -1,26 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const BoardList = require('./boardList.model.js');
 
 const BoardSchema = new Schema(
   {
-    /**
-     * Title of Board.
-     */
-    title: {
+    board_name: {
       type: String
     },
 
-    /**
-     * List of tasks.
-     * Consists of title(String) and tasks(Array).
-     */
-    list: {
-      type: Schema.Types.Mixed
+    board_list: {
+      type: [Schema.Types.BoardList]
     }
   },
-  {
-    timestamps: true
-  }
 );
 
 const Board = mongoose.model('Board', BoardSchema);
